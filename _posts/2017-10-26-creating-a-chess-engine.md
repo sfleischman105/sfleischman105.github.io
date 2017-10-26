@@ -82,7 +82,7 @@ our rough prototype for determining the best move of a position hints at the req
 
 * If we want to search the same position with multiple threads, Our `Board` should be cloneable, and those clones must be
 have the ability to be sent across threads. When a board is cloned, any modification of the clone's state (such as through a
- `Board::apply_move()` or `Board::undo_move()` must not modify the state of the original copy.
+ `Board::apply_move()` or `Board::undo_move()`) must not modify the state of the original copy.
 * `Board::apply_move()` and `Board::undo_move()` change the board state to reflect a move being applied and subsequently
 un-applied. Un-doing a move must return the state of the board to the **exact** previous state. If we are going to be
 returning to the previous state often, we should consider storing it to save some time.
@@ -124,7 +124,7 @@ Unfortunately, the compiler doesn't like this:
   = help: insert indirection (e.g., a `Box`, `Rc`, or `&`) at some point to make `Board` representable
 ```
 
-:|
+:(
 
 I've found the compiler to be a very strict parent, yelling at you for breaking *any* rule. Lovely. But the compiler is also
 very loving as well, and tells you exactly how to improve. Let's try listening to its suggestion, and wrapping the
