@@ -1,5 +1,5 @@
 ---
-title: Pleco, A Rust Chess Engine
+title: "Pleco: Creating A Chess Engine With Rust"
 ---
 
 Over the past couple months, I've been working on [Pleco](https://github.com/sfleischman105/Pleco),
