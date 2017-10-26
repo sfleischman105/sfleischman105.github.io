@@ -193,7 +193,7 @@ However, this is not a dead-end. We are on the right track for fulfilling all th
 The way Pleco represents a `Board` is *extremely* similar to the attempts above, yet fixes all the problems encountered, allowing
 for a board with __*non-cloning access to previous & current states*__  and __*thread safe cloning*__.
 
-We do this by separating the data a `Board` encases into two categories:
+We do this by separating the data the `Board` encases into two categories:
 
 1. Data relating to the current & future positions (`Board`)
 2. Data that is either computed upon making a move, or only relevant to the current position (`BoardState`)
