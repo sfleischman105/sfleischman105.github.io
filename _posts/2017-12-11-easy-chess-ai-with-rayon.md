@@ -52,7 +52,7 @@ pub fn search(board: mut Board) -> BitMove {
 
 The formulaic equivalent of this is:
 
-M<sub>b</sub> = max(eval(M<sub>0</sub>)...eval(M<sub>i</sub>))
+**M<sub>b</sub> = max(eval(M<sub>0</sub>)...eval(M<sub>i</sub>))**
 
 Where `M` is the list of moves for the current position, `b` being the index of the best move,
 and `i` being the length of our moves.
@@ -61,23 +61,22 @@ Unfortunately, simply evaluating the position after a move wouldn't lead to a ve
 As of now, we're failing to consider future moves! It'd be wise to consider what our opponent may do
 in response to our move, as well as considering our response to that move as well! 
 
-### MiniMax
+### MiniMax & NegaMax
 
-The algorithm we need to use is [MiniMax](https://en.wikipedia.org/wiki/Minimax), a recursive algorithm
-that determines the best possible move by evaluation the opponent's next possible moves.
+The basis of our algorithm stems from [MiniMax](https://en.wikipedia.org/wiki/Minimax), a recursive algorithm
+that determines the best possible move by evaluating the opponent's next possible moves. 
 
-As an example of this, let's take a random move from our list of moves, labelled as M<sub>r</sub>. Now, to score 
-this move, we have to consider the moves our opponent must play. We are most concerned about our opponent's best
-response to this move. 
+More specifically, most chess AI is based on [NegaMax](https://en.wikipedia.org/wiki/Negamax), a variation of MiniMax
+that takes into account that chess is symmetric. e.g., For any position, the score for white is the opposite of the
+score of black.
 
-After applying this move, the opponent has a list of moves `N` of length `i`. Their best move is given by:
+Negamax selects the best move to play by considering the opponent's best response.
+__*The worse your opponent's best reply is, the better your move.*__
 
-N<sub>b</sub> = max(value(N<sub>0</sub>)...value(N<sub>i</sub>))
+Modifying our equation from earlier, the best move for any position (and therefore the value of that position as well)
+ is determined by:
 
-Now, since we are evaluating from our opponent's perspective, we need to negate the value of N<sub>b</sub> to get
-the final score of M<sub>r</sub>:
-
-M<sub>r</sub> = -N<sub>b</sub> = -max(value(N<sub>0</sub>)...value(N<sub>i</sub>))
+**max(M<sub>i</sub>) = -min(value(M<sub>0</sub>)...value(M<sub>i</sub>))**
 
 Now, we apply this algorithm recursively to determine the best move for any position!
 
@@ -124,11 +123,22 @@ pub fn minimax(board: &mut Board) -> BestMove {
 }
 ```
 
-But, if we attempt to use this, we'll notice this algorithm runs forever. We forgot to add a base case!
+But, if we attempt to use this, we'll notice notice two problems:
 
-Furthermore, we're not dealing with the case of their being no possible moves available, such as when the board
-is in check, or their is a stalemate.
+1) It runs forever! As a recursive algorithm, we forgot to add a base case.
+2) The value of a stalemate (where there are no legal moves to play) returns a score of negative infinity.
 
+So, we'll define the base-case as when the algorithm reaches a certain __*depth*__. Depth is defined as the 
+number of moves applied from the starting position. When the algorithm reaches it's maximum depth, instead of
+determining the value of that position by evaluating the moves available, we'll determine the value through
+evaluation of the board itself. On the most basic level, evaluation is simply summing up the value of
+each piece on the board.
+
+If there are no moves available to play, we can determine that there is either a stalemate or checkmate.
+Checkmate is obviously the worst position available, so we'll give it an extremely low value. Stalemate leads
+to a draw, so the value of that is zero.
+
+With these two improvements, we are left with the following algorithm:
 
 ```rust
 ...
@@ -136,7 +146,7 @@ is in check, or their is a stalemate.
 pub const STALEMATE: i16 = -25000;
 pub const MATE: i16 = 0;
 
-pub fn minimax(board: &mut Board, max_depth) -> BestMove {
+pub fn negamax(board: &mut Board, max_depth) -> BestMove {
     if board.depth() >= max_depth {
         return eval_board(board);
     }
@@ -155,7 +165,7 @@ pub fn minimax(board: &mut Board, max_depth) -> BestMove {
     
     for mov in moves {
         board.apply_move(mov);
-        let returned_move: BestMove = minimax(board, max_depth).negate();
+        let returned_move: BestMove = negamax(board, max_depth).negate();
         board.undo_move();
         if returned_move.score > best_value {
             best_move.score = returned_move.score;
@@ -166,9 +176,7 @@ pub fn minimax(board: &mut Board, max_depth) -> BestMove {
 }
 ```
 
-A++
-
-### Parallizing MiniMax
+### Parallizing NegaMax
 
 
 
