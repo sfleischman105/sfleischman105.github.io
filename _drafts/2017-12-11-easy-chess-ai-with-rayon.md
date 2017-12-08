@@ -11,7 +11,7 @@ incredibly easy it's been to add parallel searching using [rayon.rs](https://git
 If you haven't read my previous blog post about Pleco, 
 [please give it a read!](https://sfleischman105.github.io/2017/10/26/creating-a-chess-engine.html)
 It provides a nice high-level overview to the inner workings of Pleco, and how we're able
-to use rust's many Zero-Cost abstrations to create a chessboard that can be sent cloned and 
+to use rust's many Zero-Cost abstractions to create a chessboard that can be sent cloned and 
 sent between threads easily.
 
 ### How does a Chess AI Work?
@@ -76,7 +76,7 @@ __*The worse your opponent's best reply is, the better your move.*__
 Modifying our equation from earlier, the best move for any position (and therefore the value of that position as well)
  is determined by:
 
-**max(M<sub>i</sub>) = -min(value(M<sub>0</sub>)...value(M<sub>i</sub>))**
+**max(M<sub>0..i</sub>) = -min(value(M<sub>0</sub>)...value(M<sub>i</sub>))**
 
 Now, we apply this algorithm recursively to determine the best move for any position!
 
@@ -125,8 +125,8 @@ pub fn minimax(board: &mut Board) -> BestMove {
 
 But, if we attempt to use this, we'll notice notice two problems:
 
-1) It runs forever! As a recursive algorithm, we forgot to add a base case.
-2) The value of a stalemate (where there are no legal moves to play) returns a score of negative infinity.
+1. It runs forever! As a recursive algorithm, we forgot to add a base case.
+2. The value of a stalemate (where there are no legal moves to play) returns a score of negative infinity.
 
 So, we'll define the base-case as when the algorithm reaches a certain __*depth*__. Depth is defined as the 
 number of moves applied from the starting position. When the algorithm reaches it's maximum depth, instead of
@@ -178,5 +178,5 @@ pub fn negamax(board: &mut Board, max_depth) -> BestMove {
 
 ### Parallizing NegaMax
 
-
+Anyone 
 
