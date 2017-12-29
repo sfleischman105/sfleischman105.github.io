@@ -11,7 +11,7 @@ incredibly easy it's been to add parallel searching using [rayon.rs](https://git
 If you haven't read my previous blog post about Pleco, 
 [please give it a read!](https://sfleischman105.github.io/2017/10/26/creating-a-chess-engine.html)
 It provides a nice high-level overview to the inner workings of Pleco, and how we're able
-to use rust's many Zero-Cost abstractions to create a chessboard that can be sent cloned and 
+to use rust's many Zero-Cost abstractions to create a chessboard that can be cloned and 
 sent between threads easily.
 
 ### How does a Chess AI Work?
@@ -76,7 +76,10 @@ __*The worse your opponent's best reply is, the better your move.*__
 Modifying our equation from earlier, the best move for any position (and therefore the value of that position as well)
  is determined by:
 
-**max(M<sub>0..i</sub>) = -min(value(M<sub>0</sub>)...value(M<sub>i</sub>))**
+**max(M<sub>0..i</sub>) = -min(-value(M<sub>0</sub>), ..., -value(M<sub>i</sub>))**
+
+We use `-value(...)` for each reply rather than `value(...)` as we evaluate that position in respect to the player who
+is currently moving in the algorithm.
 
 Now, we apply this algorithm recursively to determine the best move for any position!
 
@@ -96,12 +99,17 @@ impl BestMove {
         self
     }
     
-    pub fn new(value: i16) -> Self {
+    pub fn new_none(value: i16, ) -> Self {
         BestMove {
             mov: None,
             score: value
            }
         }
+    }
+    
+    pub fn swap_move(mut self, bitmove: BitMove) -> Self {
+        self.best_move = Some(bitmove);
+        self
     }
 }
 
@@ -123,6 +131,10 @@ pub fn minimax(board: &mut Board) -> BestMove {
 }
 ```
 
+As you can see, this is a pretty simple algorithm. To calculate the value of the first player's move, we need
+to calculate the opponent's best possible reply to that move. And to determine the best possible reply, we need 
+to calculate the best reply to those moves, and so on.
+
 But, if we attempt to use this, we'll notice notice two problems:
 
 1. It runs forever! As a recursive algorithm, we forgot to add a base case.
@@ -132,11 +144,12 @@ So, we'll define the base-case as when the algorithm reaches a certain __*depth*
 number of moves applied from the starting position. When the algorithm reaches it's maximum depth, instead of
 determining the value of that position by evaluating the moves available, we'll determine the value through
 evaluation of the board itself. On the most basic level, evaluation is simply summing up the value of
-each piece on the board.
+each piece on the board. This fits in with the symmetric nature of our algorithm. If white has the advantage of
+one knight, then black is at a disadvantage by one knight.
 
 If there are no moves available to play, we can determine that there is either a stalemate or checkmate.
 Checkmate is obviously the worst position available, so we'll give it an extremely low value. Stalemate leads
-to a draw, so the value of that is zero.
+to a draw, so the value of that is the same for both sides: zero.
 
 With these two improvements, we are left with the following algorithm:
 
@@ -178,5 +191,6 @@ pub fn negamax(board: &mut Board, max_depth) -> BestMove {
 
 ### Parallizing NegaMax
 
-Anyone 
+Looking at the code, *it's pretty clear we can search a position in parallel*. 
+The value of each move can be determined independently of one another
 
