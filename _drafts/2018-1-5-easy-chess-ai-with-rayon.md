@@ -99,7 +99,7 @@ impl BestMove {
         self
     }
     
-    pub fn new_none(value: i16, ) -> Self {
+    pub fn new_none(value: i16) -> Self {
         BestMove {
             mov: None,
             score: value
@@ -113,8 +113,14 @@ impl BestMove {
     }
 }
 
+impl Ord for BestMove {
+    fn cmp(&self, other: &BestMove) -> Ordering {
+        self.score.cmp(&other.score)
+    }
+}
+
 pub fn minimax(board: &mut Board) -> BestMove {
-    let mut best_move = BestMove::new(NEG_INFINITY);
+    let mut best_move = BestMove::new_none(NEG_INFINITY);
     
     let moves = board.generate_moves();
     
@@ -165,7 +171,6 @@ pub fn negamax(board: &mut Board, max_depth) -> BestMove {
     }
     
     let moves = board.generate_moves();
-    
     if moves.is_empty() {
         if board.in_check() {
             return BestMove::new(STALEMATE);
@@ -178,12 +183,11 @@ pub fn negamax(board: &mut Board, max_depth) -> BestMove {
     
     for mov in moves {
         board.apply_move(mov);
-        let returned_move: BestMove = negamax(board, max_depth).negate();
+        let returned_move: BestMove = negamax(board, max_depth)
+            .negate()
+            .swap_move(mov);
         board.undo_move();
-        if returned_move.score > best_value {
-            best_move.score = returned_move.score;
-            best_movemov = Some(mov);
-        }
+        best_move = max(returned_move, best_move);
     }
     best_move
 }
@@ -191,6 +195,73 @@ pub fn negamax(board: &mut Board, max_depth) -> BestMove {
 
 ### Parallizing NegaMax
 
-Looking at the code, *it's pretty clear we can search a position in parallel*. 
-The value of each move can be determined independently of one another
+This algorithm works pretty well! But can we make it faster?
+ 
+Currently, Negamax runs sequentially. If we're attempting to make a lightning-fast 
+chess searcher, __*utlizing all available processors will prove essential*__. 
 
+Luckily, Negamax is very easily parallizable. Given a position, the value of any move
+can be determined independently of the other moves. This works by sending a subtree of 
+the search space to each processor to work on independently. When both the tasks are
+complete, we simply return the better value between them. 
+
+This is an example of a [Fork Join Algorithm](https://en.wikipedia.org/wiki/Fork%E2%80%93join_model), 
+one of my favorite types of parallel algorithms due to it's simplicity. 
+
+To implement this, we will use [Rayon](https://github.com/rayon-rs/rayon), a data-parallelism library
+for Rust. The function `rayon::join` provides exactly the functionality we want; allowing concurrent 
+processing of independent data.
+
+```rust
+use rayon;
+
+const DIVIDE_CUTOFF: usize = 8;
+
+pub fn parallel_minimax(board: &mut Board, max_depth: u16) -> BestMove {
+    if board.depth() >= max_depth {
+        return eval_board(board);
+    }
+
+    let moves = board.generate_moves();
+    if moves.is_empty() {
+        if board.in_check() {
+            BestMove::new_none(MATE)
+        } else {
+            BestMove::new_none(STALEMATE)
+        }
+    } else {
+        parallel_task(&moves, board, max_depth)
+    }
+}
+
+fn parallel_task(slice: &[BitMove], board: &mut Board, max_depth: u16) -> BestMove {
+    if board.depth() == max_depth - 2 || slice.len() <= DIVIDE_CUTOFF {
+        let mut best_move = BestMove::new_none(NEG_INFINITY);
+
+        for mov in slice {
+            board.apply_move(*mov);
+            let returned_move: BestMove = parallel_minimax(board, max_depth)
+                .negate()
+                .swap_move(*mov);
+            board.undo_move();
+            best_move = max(returned_move, best_move);
+        }
+        best_move
+    } else {
+        let mid_point = slice.len() / 2;
+        let (left, right) = slice.split_at(mid_point);
+        let mut left_clone = board.parallel_clone();
+
+        let (left_move, right_move) = rayon::join(
+            || parallel_task(left, &mut left_clone, max_depth),
+            || parallel_task(right, board, max_depth),
+        );
+
+        max(left_move,right_move)
+    }
+}
+```
+
+You'll notice two interesting things about this implementation:
+1. There is a `DIVIDE_CUTOFF`
+2. We do the search sequentially once we're two plys away from the maximum depth.
