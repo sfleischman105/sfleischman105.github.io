@@ -11,41 +11,36 @@ using Rust to create this project.
 I've found that the easiest way to effectively communicate something is to _pretend to 
 be answering a question._ So, this'll be a series of responses to my own questions. woo.
 
-#### Why did you use Rust to make a chess engine?
+#### Why a Chess Engine?
 
-Not entirely sure.
+In one of my computer science classes, we were tasked with creating a couple chess-bots. 
+One of which, rather than implementing a specific searching algorithm, had simply the goal of
+beating other bots created by the instructor. This consisted of taking the bots previously made,
+and modifying them to be faster and stronger. 
 
-I'm currently an undergraduate CS student, and I've been versed in languages commonly taught 
-in academia. Java was the start, and soon that led to Python, C, and C++. All of these languages I hold dear, and 
-I doubt I'd be able to make the jump to Rust without the previous knowledge I had of these language. 
+Many unnecessary all-nighters were pulled in the search for speed. It felt good. So good, It scratched that
+some part of my mind. The part that yearns for raw speed and efficiency. The part craving the hypnotic cycle of
+tinker-run-measure.
 
-The luxury of being a student is in the ability to pursue side projects while also furthering your studies.
-Rust seemed like a foreign language, but with the added bonus of _real_ practical functionality. Being a language
-that allowed operation on the bare-metal side of the computer piqued my curiosity. The phrase "It's turtles all 
-the way down" has become more of a prophecy than a idiom the further I've delved into Computer Science. Learning
-about computers is an act of falling from one turtle to another, hoping for a bottom somewhere. I've learned there
-is, in fact, an end to the turtles. But that's simply the distraction. The thing that should be noticed is rather
-the fact the turtles are getting bigger, and far __*uglier*__ as you reach the bottom. 
+Unfortunately, the assignment had to end eventually. But it left me with this new craving of building something
+*fast*. I figured creating a new engine from the ground up might scratch this itch as well.
 
-The journey I've experienced in learning computer science has exemplified a belief that there is an inherit
-tradeoff in delving down the turtles: The more you know, the uglier it is. Low-level languages have taught me
-quiet a large amount. In my first year at the undergraduate, I couldn't fathom why it was necessary to have both a
-`double` and `Double` type in java. Why can my jave class contain a `double` variable, but once I needed to place that
-variable in an `ArrayList`, it needs to be wrapped in a `Double`? Doesn't make any sense.
+#### Why Rust?
 
-...Until I learnt the programming language C. 
+If you want speed, C or C++ is the way to go. Unfortunately, both of those languages are a tad frustrating at times.
+Somehow, I stumbled upon rust, which offered *blazingly fast speed, segfaults prevention, and guaranteed thread safety.*
+Alright, that sounds good enough for me. 
 
-C teaches you that the CPU, rather than being a magical meteorite sent from heaven, is rather a really dumb rock capable of 
-doing simple things very fast. It all makes sense now, a `double` is stored in the stack, while a `Double` is a wrapper around
-a heap-allocated `double` value. 
+#### How far along is Pleco?
 
-Unfortunately, learning C is the equivalent of getting near the bottom of the turtles. Yes, you can see feet somewhere down there. 
-And yes, upon learning C *you've achieved enlightenment in the ways of the programming gods*.
-But upon turning around you see that you're on the back of an *__ALLIGATOR SNAPPING TURTLE__* that requires the *__sacrifice of your 
-first-born son__* in order to prevent `SIGSEGV` from being branded yet again into another part of your skin. 
+Currently at ~11,342 LoC in the project so far, and ~16,835 including documentation.
 
-Personally, I'm happy to have quiet a good amount of skin deteriorations to be able to see the feet of the bottom-most turtle.
-It's fascinating, isn't it? Knowledge is power, and knowledge of the bare-metal computer allows for some further understanding of the
-turtles above it. However, it's a very ugly and larg turtle 
+But as of now, very far along. Entry into tournaments usually requires a chess engine to
+use the UCI (Universal Chess Interface) for engine-gui communication. Pleco has that implemented,
+and prelimanary tests have shown it works fairly well. It still needs more testing though.
+
+#### Does Pleco have a rating?
+
+Officially, no. But tournaments on my own computer have estimated a rating of around ~1900 ELO.
 
 
