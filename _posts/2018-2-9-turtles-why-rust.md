@@ -8,7 +8,7 @@ their own insights and alternate ways to *pull out your hair*. Java is like pull
 a tad excessive _(can't I just use tweezers?)_, but it usually works. Python is like waving a magic wand over your hair 
 *and somehow it disappears*. Attempting to use this magic over any large portion of the body will leave you with 
 thoughts of _"Where did my arm go?"_ The equivalent to using a knife to pull out your hair would be C. It's *fast*,
-and my god you can target hair you want. But every other cut **_somehow takes off a chunk of your skin with it._**
+and you can target any hair desired. But every other cut **_somehow takes off a chunk of your skin with it._**
 C++ is like C, but with a chainsaw. 
 
 Eventually, It becomes boring pulling your hair out the same way every time. Maybe it takes too long to get out
@@ -24,7 +24,7 @@ a bottom somewhere. There is, in fact, an end to the turtles. But that's simply 
 Rather, it should be noticed that the turtles are getting bigger, and far __*uglier*__ as you reach the bottom. 
 
 I'm of the belief that there is an inherit trade-off in delving down the turtles: You know more, you can do more, but
-it is _ugly_. Low-level languages have taught me quiet a large amount. In my first year at the undergraduate, I couldn't
+it is _ugly_. Low-level languages have taught me quite a large amount. In my first year at the undergraduate, I couldn't
 fathom why it  was necessary to have both a `double` and `Double` type in java. _THEY BOTH HAVE THE SAME NAME AND DO THE 
 SAME THING._ Why can my java class contain a `double` variable, but once I need to place that variable in an `ArrayList`,
 it needs to be wrapped in a `Double`? 
@@ -48,7 +48,7 @@ It's fascinating, isn't it? Knowledge is power, and knowledge of the bare-metal 
 turtles above it. And *my goodness!* This turtle is **HUGE**, there's so much I can do down here! And this ancient 
 reptile *doesn't bat an eye* if you want to play with fire, unlike the ones above it. 
 
-The mute alligator snapping turtle, _unfortunately_, has the back of it's shell filled with multiple poisonous swamps,
+The mute alligator snapping turtle, _unfortunately_, has a back filled with multiple poisonous swamps,
 and no danger signs to mark them. It's uncomfortably easy to light a match down here and
 discover *__THE SWAMP WAS FILLED WITH METHANE.__*  That wood cabin you've spent hours building? _It's on fire now._ 
 And the fire-department is a couple turtles up, 
@@ -63,11 +63,11 @@ as there's no longer a choice between freedom and safety. _"Why not both?"_ says
 paper detailing its unique system of borrowing and mutating. Now, I have the same sense of freedom while programming, 
 alongside a knowledge of the overhead and costs of my actions. But it also includes safety measures to prevent me from
 doing anything terrible. Equipped with my piece of paper, I can now focus my efforts on building a log cabin with the
-right material, and spend my time worring about whether or not the window curtains should be colored *burgendy* or
-*space grey*. No more accidentally removing the front wall while the roof is being built. 
+right material, and spend my time worring about whether or not the window curtains should be colored burgundy or
+space-grey. No more accidentally removing the front wall while the roof is being built. 
 
 With this praise in mind, Rust still offers it's own ways of pulling out your hair. The Rust turtle (Or should I
-say Crustacean?) *requires* that when pulling out a hair, *though shall not touch any hairs in the vicinity*. Attempts
+say crustacean?) *requires* that when pulling out a hair, *though shall not touch any hairs in the vicinity*. Attempts
 to break this causes the crustacean to grab you with it's pincers, swinging you around to it's meaty face, right before
 belching out a lecture about the **terrible things** you are trying to do. Learning how to pluck my hairs with Rust has
 been the worst part so far. It's a learning curve too steep to bike up. On top of this, the crustacean is more picky 
