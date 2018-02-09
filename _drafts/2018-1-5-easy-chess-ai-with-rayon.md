@@ -265,3 +265,5 @@ fn parallel_task(slice: &[BitMove], board: &mut Board, max_depth: u16) -> BestMo
 You'll notice two interesting things about this implementation:
 1. There is a `DIVIDE_CUTOFF`
 2. We do the search sequentially once we're two plys away from the maximum depth.
+
+This is because using a Fork-Join algorithm isn't an algorithm without it's costs. 

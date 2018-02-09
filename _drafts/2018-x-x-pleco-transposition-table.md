@@ -10,9 +10,9 @@ material focused for Intermediate Rustaceans. Personally, some of the most helpf
 are ones that explain a concept, and then show how to implement it with Rust. A perfect example of 
 this is [Learning Rust with Too Many Linked Lists](http://cglab.ca/~abeinges/blah/too-many-lists/book/).
 
-This post will talk about Transposition Tables, an invaluable structure for chess AI. I'd recommend 
+This post will talk about Transposition Tables, an *invaluable* structure for chess AI. I'd recommend 
 skimming [my previous blog post](https://sfleischman105.github.io/2017/10/26/creating-a-chess-engine.html) 
-for basic understandings of how a chess AI works.
+for some basic knowledge of how a `Board` is implemented.
 
 #### What is a Transposition Table?
 
@@ -74,7 +74,7 @@ However, he won't save you from whatever Cthulhu-esq monster ends up spawning, a
 won't save you from it eating your family as well. 
 
 So, we need some ideas of how this Lovecraftian monster could be spawned, as well as guidelines
-to prevent this, deal with it, or accept it's possibility.
+to prevent this, deal with it, or accept it's inevitability.
 
 ##### Invalid pointers
 
@@ -111,4 +111,11 @@ For now, we're just gonna have to try our best to mitigate this by locally stori
 retrieved at once, as well as modifying all the data at once.
 
 
+### Allocating
 
+
+
+### Faster Indexing
+
+
+### Enabling Re-sizing
