@@ -4,12 +4,12 @@ title: "Plucking hairs & jumping down the turtles: Why did I learn Rust?"
 
 Not entirely sure.
 
-As undergraduate CS student, I was plunged into the spinning wheel of industry standard languages. Java to start,
+As an undergraduate CS student, I was plunged into the spinning wheel of industry standard languages. Java to start,
 followed by Python, C, and C++. Each language flung me into a new world of programming idioms, each filled with 
 their own insights and alternate ways to *pull out your hair*. Java is like pulling hairs out with a needle-node plier:
 verbose, but it usually works. Python is like waving a magic wand over your hair *and somehow it disappears*. The 
 equivilent to using a knife to pull out your hair would be C. It's *fast*, and my god you can cut any hair you want,
-but every other cut **_somehow takes off a chunk of your skin with it._**. C++ is like C, but with a chainsaw. 
+but every other cut **_somehow takes off a chunk of your skin with it._** C++ is like C, but with a chainsaw. 
 
 Eventually, It becomes boring pulling your hair out the same way every time. Maybe it takes too long to get out
 the surgical equipment, or you're sick of missing with the knife and having a **hole in your arm**.
@@ -21,7 +21,7 @@ I've delved into Computer Science. Learning about computers is an act of falling
 a bottom somewhere. I've learned there is, in fact, an end to the turtles. But that's simply the distraction. 
 The thing that should be noticed is rather the fact the turtles are getting bigger, and far __*uglier*__ as you reach the bottom. 
 
-I'm off the belief that there is an inherit trade-off in delving down the turtles: You know more, you can do more, but
+I'm of the belief that there is an inherit trade-off in delving down the turtles: You know more, you can do more, but
 it is _ugly_. Low-level languages have taught me quiet a large amount. In my first year at the undergraduate, I couldn't fathom why it 
 was necessary to have both a `double` and `Double` type in java. Why can my java class contain a `double` variable, but once
 I needed to place that variable in an `ArrayList`, it needs to be wrapped in a `Double`? Why do I need to grab a different tool
@@ -57,7 +57,10 @@ built.
 
 With this praise in mind, Rust still offers it's own ways of pulling out your hair. The Rust turtle (Or should I say Crustacean?) 
 *requires* that when pulling out a hair, *none of hairs around it can be touched*. Any attempts to break this causes the crustacean
-to grab you with it's pincers, bring you to it's meaty face, and then lectures you about the terrible things you are trying to do.
+to grab you with it's pincers, swinging you around to it's meaty face, right before belching out a lecture you about the terrible things 
+you are trying to do. It's annoying, but the crustacean is doing this to protect you... *it's probably not a good idea to take out a wall
+while the roof is on anyways*. Learning how to pluck my hairs with Rust has been the worst part so far. The crustacean is more picky
+than even the topmost turtles on the proper ways to do things. 
 
 Also, the crustacean is currently missing a leg or two, but they're growing slowly. 
 
