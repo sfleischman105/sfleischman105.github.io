@@ -8,7 +8,7 @@ their own insights and alternate ways to *pull out your hair*. Java is like pull
 a tad excessive _(can't I just use tweezers?)_, but it usually works. Python is like waving a magic wand over your hair 
 *and somehow it disappears*. Attempting to use this magic over any large portion of the body will leave you with 
 thoughts of _"Where did my arm go?"_ The equivalent to using a knife to pull out your hair would be C. It's *fast*,
-and my god you can cut any hair you want. But every other cut **_somehow takes off a chunk of your skin with it._**
+and my god you can target hair you want. But every other cut **_somehow takes off a chunk of your skin with it._**
 C++ is like C, but with a chainsaw. 
 
 Eventually, It becomes boring pulling your hair out the same way every time. Maybe it takes too long to get out
@@ -31,7 +31,7 @@ it needs to be wrapped in a `Double`?
 I'm just trying to pluck multiple hairs at the same time, _WHY DO I NEED DIFFERENT PLIERS FROM THE SAME MANUFACTURER?_ 
 What type of sorcery is this?
 
-Upon learning C, I gained some insight.
+Learning C helped pull back the curtain. 
 
 C teaches you that the CPU, rather than being a magical meteorite sent from heaven, is rather a really dumb rock capable of 
 doing simple things very fast. _Ah-ha!_ It all makes sense now, a `double` is stored in the stack, while a `Double` is a
@@ -58,25 +58,26 @@ the boundary of the sparky-boom-boom gas. Hey, freedom comes with a price, and t
 pyromancy at inopportune times.
 
 Through a half year of Rust, I've come to re-evaluate my previous thoughts concerning this tradeoff. _It's dangerous 
-wandering the swamps, but it allows for freedom seldom granted by the turtles above._ Rust, through it's unique system 
-of borrowing and mutating, has given me a sense of freedom while programming, alongside a knowledge of the overhead
-and costs of my actions. But it also includes safety measures to prevent me from doing anything terrible. Now, I can
-focus my efforts on building a log cabin with the right material, and worry about whether or not the window curtains
-should be colored *burgendy* or *space grey*. No more accidentally removing the front wall while the roof is being
-built. 
+wandering the swamps, but it allows for freedom seldom granted by the turtles above._ Rust lives up to its claims, 
+as there's no longer a choice between freedom and safety. _"Why not both?"_ says Rust, handing me a crumpled up piece of
+paper detailing its unique system of borrowing and mutating. Now, I have the same sense of freedom while programming, 
+alongside a knowledge of the overhead and costs of my actions. But it also includes safety measures to prevent me from
+doing anything terrible. Equipped with my piece of paper, I can now focus my efforts on building a log cabin with the
+right material, and spend my time worring about whether or not the window curtains should be colored *burgendy* or
+*space grey*. No more accidentally removing the front wall while the roof is being built. 
 
 With this praise in mind, Rust still offers it's own ways of pulling out your hair. The Rust turtle (Or should I
 say Crustacean?) *requires* that when pulling out a hair, *though shall not touch any hairs in the vicinity*. Attempts
 to break this causes the crustacean to grab you with it's pincers, swinging you around to it's meaty face, right before
 belching out a lecture about the **terrible things** you are trying to do. Learning how to pluck my hairs with Rust has
-been the worst part so far. The crustacean is more picky than even the topmost turtles.
-It's annoying, but the crustacean is doing this to protect you... *it's probably not a good idea to take out a
-wall while the roof is on anyways*.
+been the worst part so far. It's a learning curve too steep to bike up. On top of this, the crustacean is more picky 
+than even the topmost turtles. It's annoying, but the crustacean is doing this to protect you...
+*it's probably not a good idea to take out a wall while the roof is on anyways*.
 
 Despite the possibility of never using Rust in an industrial project, I wouldn't regret learning it. Alike C, Rust
-has shown me a new way to look at the world of programming. The concepts of immutability and borrowing are seldom
-taught explicitly in learning computer science. Yet, they are concepts applicable to any programming language.
-These concepts have changed the way I program in any language, allowing me to write code that is safer and more
+has shown me a new way to look at the world of programming. The concepts of immutability and borrowing were seldom
+taught explicitly in my computer science classes. Yet, they are concepts applicable to any programming language.
+These concepts have changed the way I program, allowing me to write code that is safer, and more
 logically organized. 
 
 For myself, there is no direct answer to the question, *"Why did I learn Rust?"*, but I'm thankful for the lessons the
