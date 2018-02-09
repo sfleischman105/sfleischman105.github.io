@@ -6,7 +6,8 @@ As an undergraduate CS student, I was plunged into the spinning wheel of industr
 followed by Python, C, and C++. Each language flung me into a new world of programming idioms, each filled with 
 their own insights and alternate ways to *pull out your hair*. Java is like pulling hairs out with a needle-node plier:
 a tad excessive (can't I just use pliers?), but it usually works. Python is like waving a magic wand over your hair 
-*and somehow it disappears*. The equivalent to using a knife to pull out your hair would be C. It's *fast*, and my 
+*and somehow it disappears*. Attempting to use this magic over any large portion of the body will leave you with 
+thoughts of _"Where did my arm go?"_ The equivalent to using a knife to pull out your hair would be C. It's *fast*, and my 
 god you can cut any hair you want, but every other cut **_somehow takes off a chunk of your skin with it._**
 C++ is like C, but with a chainsaw. 
 
