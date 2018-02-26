@@ -88,28 +88,18 @@ In rust code, here is the result:
 ```rust
 pub const NEG_INFINITY: i16 = -30001;
 
-pub struct BestMove {
-    pub mov: Option<BitMove>,
-    pub score: i16,
+pub struct ScoringMove {
+    pub bit_move: BitMove,
+    pub score: i16
 }
 
 impl BestMove {
-    pub fn negate(mut self) -> Self {
-        self.score = self.score.wrapping_neg();
-        self
-    }
-    
-    pub fn new_none(value: i16) -> Self {
-        BestMove {
-            mov: None,
-            score: value
-           }
+    #[inline(always)]
+    pub fn blank(score: i16) -> Self {
+        ScoringMove {
+            bit_move: BitMove::null(),
+            score,
         }
-    }
-    
-    pub fn swap_move(mut self, bitmove: BitMove) -> Self {
-        self.best_move = Some(bitmove);
-        self
     }
 }
 
@@ -120,20 +110,15 @@ impl Ord for BestMove {
 }
 
 pub fn minimax(board: &mut Board) -> BestMove {
-    let mut best_move = BestMove::new_none(NEG_INFINITY);
-    
-    let moves = board.generate_moves();
-    
-    for mov in moves {
-        board.apply_move(mov);
-        let returned_move: BestMove = minimax(board, max_depth).negate();
-        board.undo_move();
-        if returned_move.score > best_move.score {
-            best_move.score = returned_move.score;
-            best_movemov = Some(mov);
-        }
-    }
-    best_move
+     board.generate_scoring_moves()
+        .into_iter()
+        .map(|mut m: ScoringMove| {
+            board.apply_move(m.bit_move);
+            m.score = -minimax(board, depth - 1).score;
+            board.undo_move();
+            m
+        }).max()
+        .unwrap()
 }
 ```
 
@@ -162,35 +147,33 @@ With these two improvements, we are left with the following algorithm:
 ```rust
 ...
 
-pub const STALEMATE: i16 = -25000;
-pub const MATE: i16 = 0;
+pub const MATE_V: i16 = 25000;
+pub const DRAW_V: i16 = 0;
 
-pub fn negamax(board: &mut Board, max_depth) -> BestMove {
-    if board.depth() >= max_depth {
+pub fn minimax(board: &mut Board, depth: u16) -> ScoringMove {
+    if depth == 0 {
         return eval_board(board);
     }
-    
-    let moves = board.generate_moves();
+
+    let moves = board.generate_scoring_moves();
     if moves.is_empty() {
         if board.in_check() {
-            return BestMove::new(STALEMATE);
+            return ScoringMove::blank(-MATE_V);
         } else {
-            return BestMove::new(MATE);
+            return ScoringMove::blank(DRAW_V);
         }
     }
-    
-    let mut best_move = BestMove::new(NEG_INFINITY);
-    
-    for mov in moves {
-        board.apply_move(mov);
-        let returned_move: BestMove = negamax(board, max_depth)
-            .negate()
-            .swap_move(mov);
-        board.undo_move();
-        best_move = max(returned_move, best_move);
-    }
-    best_move
+
+    moves.into_iter()
+        .map(|mut m: ScoringMove| {
+            board.apply_move(m.bit_move);
+            m.score = -minimax(board, depth - 1).score;
+            board.undo_move();
+            m
+        }).max()
+        .unwrap()
 }
+
 ```
 
 ### Parallizing NegaMax
@@ -198,7 +181,7 @@ pub fn negamax(board: &mut Board, max_depth) -> BestMove {
 This algorithm works pretty well! But can we make it faster?
  
 Currently, Negamax runs sequentially. If we're attempting to make a lightning-fast 
-chess searcher, __*utlizing all available processors will prove essential*__. 
+chess searcher, __*utilizing all available processors will prove essential*__. 
 
 Luckily, Negamax is very easily parallizable. Given a position, the value of any move
 can be determined independently of the other moves. This works by sending a subtree of 
@@ -213,57 +196,52 @@ for Rust. The function `rayon::join` provides exactly the functionality we want;
 processing of independent data.
 
 ```rust
-use rayon;
+use rayon::prelude::*;
+use mucow::MuCow;
 
-const DIVIDE_CUTOFF: usize = 8;
-
-pub fn parallel_minimax(board: &mut Board, max_depth: u16) -> BestMove {
-    if board.depth() >= max_depth {
-        return eval_board(board);
+pub fn parallel_minimax(board: &mut Board, depth: u16) -> ScoringMove {
+    if depth <= 2 {
+        return minimax(board, depth);
     }
 
-    let moves = board.generate_moves();
+    let mut moves = board.generate_scoring_moves();
     if moves.is_empty() {
         if board.in_check() {
-            BestMove::new_none(MATE)
+            return ScoringMove::blank(-MATE_V);
         } else {
-            BestMove::new_none(STALEMATE)
+            return ScoringMove::blank(DRAW_V);
         }
-    } else {
-        parallel_task(&moves, board, max_depth)
     }
-}
-
-fn parallel_task(slice: &[BitMove], board: &mut Board, max_depth: u16) -> BestMove {
-    if board.depth() == max_depth - 2 || slice.len() <= DIVIDE_CUTOFF {
-        let mut best_move = BestMove::new_none(NEG_INFINITY);
-
-        for mov in slice {
-            board.apply_move(*mov);
-            let returned_move: BestMove = parallel_minimax(board, max_depth)
-                .negate()
-                .swap_move(*mov);
-            board.undo_move();
-            best_move = max(returned_move, best_move);
-        }
-        best_move
-    } else {
-        let mid_point = slice.len() / 2;
-        let (left, right) = slice.split_at(mid_point);
-        let mut left_clone = board.parallel_clone();
-
-        let (left_move, right_move) = rayon::join(
-            || parallel_task(left, &mut left_clone, max_depth),
-            || parallel_task(right, board, max_depth),
-        );
-
-        max(left_move,right_move)
-    }
+    
+    let board_wr: MuCow<Board> = MuCow::Borrowed(board);
+    
+    moves.as_mut_slice()
+        .par_iter_mut()
+        .map_with(board_wr, |b: &mut MuCow<Board>, m: &mut ScoringMove | {
+            b.apply_move(m.bit_move);
+            m.score = -parallel_minimax(&mut *b, depth - 1).score;
+            b.undo_move();
+            m
+        }).max()
+        .unwrap()
+        .clone()
 }
 ```
 
 You'll notice two interesting things about this implementation:
-1. There is a `DIVIDE_CUTOFF`
-2. We do the search sequentially once we're two plys away from the maximum depth.
+1. We use a `MuCow` to wrap the `Board`
+2. We do the search sequentially once we're two plys away from the base depth.
 
-This is because using a Fork-Join algorithm isn't an algorithm without it's costs. 
+This is because using a Fork-Join algorithm isn't an algorithm without costs. A call to a parallel iterator 
+will spawn several tasks to be completed, and each queueing and de-queuing of a task has a cost associated with
+it. We're trying to maximize processor utilization, while also minimizing the cost of using all processors at once.
+
+Now, why are we using a `MuCow`? Well, because we want to use `rayon::map_with`, as it only clones the `Board` if 
+and only if it needs to. Ideally, rayon will split the array into chunks for each task, and then have each processor
+iterate over it's chunk sequentially. `MuCow` is a clone-on-consume smart pointer, only cloning when consumed. 
+As `map_with` is a consuming operator, we prefer to only clone the `Board` (an expensive operation!) only when
+necessary.
+
+### Benchmark Comparisons
+
+
