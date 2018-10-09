@@ -71,7 +71,7 @@ They turned out great!
 I printed out a dummy front panel for just one side. The LEDs fit fairly snugly inside - 
 no need for any screws holding it in
 
-![With 3d Printed mask](assets/led_glasses_initial/3Dprint_front.jpg)
+![With 3d Printed mask](assets/led_glasses/3Dprint_front.jpg)
 
 However, wiring turned out to be **_ugly_**.
 
