@@ -21,7 +21,7 @@ space inside each frame, hand soldering LEDs together would be extremely cumbers
 up too much space as well. NeoPixels also advise the inclusion of a 0.1µF capacitor between each
 pixel, to prevent misbehavior. It's unlikely a capacitor would also fit inside the frame.
 
-## PCB and Circuit Layouts
+## Circuit Layout and PCB design
 
 Each NeoPixel has a `data_in`, `data_out`, `5V`, and `GND` pins. The first pixel starts at 9-0'clock
 on the board's outer ring, and continues clockwise until connecting to the next inner ring. There 
@@ -35,7 +35,9 @@ for the data/power/ground to be hand wired.
 
 ![sketch1]({{site.url}}{{site.baseurl}}/assets/images/ledglasses/PCB_sketch1.jpg)
 
-OSHPark was used to print, turning out very well. _(The purple color is lovely)_
+OSHPark was used to print the PCBs, turning out very well. _(The purple color is lovely)_
+
+Each PCB was probed for faulty/crossing tracks, turning up nothing. 
 
 ![sketch1]({{site.url}}{{site.baseurl}}/assets/images/ledglasses/PCB1_initial.jpg)
 
@@ -49,7 +51,7 @@ Firstly, SMD 0.1µF capacitors were soldered using a Reflow oven.
 
 ![Capacitor Soldered]({{site.url}}{{site.baseurl}}/assets/images/ledglasses/PCB1_cap_solder.jpg)
 
-Now for the LEDs...
+Soldering the LEDs was pretty straightforward, and eerily relaxing.
 
 ![Half Soldered Back]({{site.url}}{{site.baseurl}}/assets/images/ledglasses/PCB1_led_solder_b.jpg)
 
@@ -70,6 +72,9 @@ And now both soldered!
 
 They turned out great! 
 
+I'd upload a demo video of them working, but I'm a little too lazy right now. But let me tell you,
+these things are _bright_. They're so bright I can't look at them without sunglasses on.
+
 ## 3d Printed Front Panel
 
 I printed out a dummy front panel for just one side. The LEDs fit fairly snugly inside - 
@@ -77,13 +82,16 @@ no need for any screws holding it in
 
 ![With 3d Printed mask]({{site.url}}{{site.baseurl}}/assets/images/ledglasses/3Dprint_front.jpg)
 
-However, wiring turned out to be **_ugly_**.
+However, wiring turned out to be **_ugly_**. Big chunky wires between each ring -- not so good
+if these PCBs are going to be in a compact space.
 
 ![Ugly wiring]({{site.url}}{{site.baseurl}}/assets/images/ledglasses/PCB1_ugly_wires.jpg)
 
-But hey, they work great!
+Yuck.
 
-## Second attempt
+A good prototype, but we can do better.
+
+## Attempt #2
 
 So some problem points with the first incarnation:
 - Wiring between rings took too much space, looked bad, and were infuriatingly hard to attach wire to.
