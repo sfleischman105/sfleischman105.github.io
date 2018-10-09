@@ -1,2 +1,6 @@
 github_username: sfleischman105
 theme: minima
+
+include:
+    - _pages
+    - assets
