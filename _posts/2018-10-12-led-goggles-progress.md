@@ -3,7 +3,7 @@ title: "LED Replica Glasses - Progress Report"
 ---
 
 As a side project, I've been trying to recreate 
-[REZZ's Crazy LED glasses](assets/images/led_glasses/rezz.jpg). 
+[REZZ's Crazy LED glasses](assets/images/ledglasses/rezz.jpg). 
 Seemed like a great and usable introduction to embedded programming, as well
 as using fields outside of programming (Electronics, 3D Design, possibly music). 
 
@@ -33,11 +33,11 @@ using KiCad's Python scripting console (so nifty!). Being my first time ordering
 if it was possible to connect the bridges between the rings, so I included pins on the internal rings
 for the data/power/ground to be hand wired.
 
-![sketch1]({{"/assets/images/led_glasses/PCB_sketch1.jpg"|absolute_url}})
+![sketch1]({{"/assets/images/ledglasses/PCB_sketch1.jpg"|absolute_url}})
 
 OSHPark was used to print, turning out very well. _(The purple color is lovely)_
 
-![sketch1]({{site.url}}{{site.baseurl}}/assets/images/led_glasses/PCB1_initial.jpg)
+![sketch1]({{site.url}}{{site.baseurl}}/assets/images/ledglasses/PCB1_initial.jpg)
 
 
 ## Soldering
@@ -47,22 +47,22 @@ Firstly, SMD 0.1µF capacitors were soldered using a Reflow oven.
 
 (This was a huge pain, I underestimated how small the capacitors would really be)
 
-![Capacitor Soldered]({{site.url}}{{site.baseurl}}/assets/images/led_glasses/PCB1_cap_solder.jpg)
+![Capacitor Soldered]({{site.url}}{{site.baseurl}}/assets/images/ledglasses/PCB1_cap_solder.jpg)
 
 Now for the LEDs...
 
-![Half Soldered Back]({{site.url}}{{site.baseurl}}/assets/images/led_glasses/PCB1_led_solder_b.jpg)
-![Half Soldered Front]({{site.url}}{{site.baseurl}}/assets/images/led_glasses/PCB1_led_solder_f.jpg)
+![Half Soldered Back]({{site.url}}{{site.baseurl}}/assets/images/ledglasses/PCB1_led_solder_b.jpg)
+![Half Soldered Front]({{site.url}}{{site.baseurl}}/assets/images/ledglasses/PCB1_led_solder_f.jpg)
 
 And some testing...
 
-![Half Soldered Testing]({{site.url}}{{site.baseurl}}/assets/images/led_glasses/PCB1_test_wiring.jpg)
+![Half Soldered Testing]({{site.url}}{{site.baseurl}}/assets/images/ledglasses/PCB1_test_wiring.jpg)
 
 Finally, the rest.
 
-![One Fully Soldered]({{site.url}}{{site.baseurl}}/assets/images/led_glasses/PCB1_led_solder_final.jpg)
+![One Fully Soldered]({{site.url}}{{site.baseurl}}/assets/images/ledglasses/PCB1_led_solder_final.jpg)
 
-![Both Fully Soldered]({{site.url}}{{site.baseurl}}/assets/images/led_glasses/PCB1_final.jpg)
+![Both Fully Soldered]({{site.url}}{{site.baseurl}}/assets/images/ledglasses/PCB1_final.jpg)
 
 They turned out great! 
 
@@ -71,11 +71,11 @@ They turned out great!
 I printed out a dummy front panel for just one side. The LEDs fit fairly snugly inside - 
 no need for any screws holding it in
 
-![With 3d Printed mask]({{site.url}}{{site.baseurl}}/assets/images/led_glasses/3Dprint_front.jpg)
+![With 3d Printed mask]({{site.url}}{{site.baseurl}}/assets/images/ledglasses/3Dprint_front.jpg)
 
 However, wiring turned out to be **_ugly_**.
 
-![Ugly wiring]({{site.url}}{{site.baseurl}}/assets/images/led_glasses/PCB1_ugly_wires.jpg)
+![Ugly wiring]({{site.url}}{{site.baseurl}}/assets/images/ledglasses/PCB1_ugly_wires.jpg)
 
 But hey, they work great!
 
@@ -100,7 +100,7 @@ and flow.
 - Track Cleanup. 
 
 
-![sketch2]({{site.url}}{{site.baseurl}}/assets/images/led_glasses/PCB_sketch2.jpg)
+![sketch2]({{site.url}}{{site.baseurl}}/assets/images/ledglasses/PCB_sketch2.jpg)
 
 
 Future steps:
