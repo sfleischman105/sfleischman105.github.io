@@ -18,7 +18,7 @@ addressable, as well as being the right size.
 
 Using custom Printed Circuit Boards seemed like the best way to go about this. With such a small
 space inside each frame, hand soldering LEDs together would be extremely cumbersome, and take
-up too much space as well. NeoPixels also advise the inclusion of a 0.1µF capacitor between each
+up too much space as well. NeoPixels also advise the inclusion of a 0.1µF decoupling capacitor between each
 pixel, to prevent misbehavior. It's unlikely a capacitor would also fit inside the frame.
 
 ## Circuit Layout and PCB design
