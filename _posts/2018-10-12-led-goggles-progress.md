@@ -33,7 +33,7 @@ using KiCad's Python scripting console (so nifty!). Being my first time ordering
 if it was possible to connect the bridges between the rings, so I included pins on the internal rings
 for the data/power/ground to be hand wired.
 
-![sketch1]({{site.url}}{{site.baseurl}}/assets/images/led_glasses/PCB_sketch1.jpg)
+![sketch1]({{"/assets/images/led_glasses/PCB_sketch1.jpg"|absolute_url}})
 
 OSHPark was used to print, turning out very well. _(The purple color is lovely)_
 
