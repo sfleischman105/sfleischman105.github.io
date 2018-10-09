@@ -53,15 +53,18 @@ Now for the LEDs...
 
 ![Half Soldered Back](assets/images/ledglasses/PCB1_led_solder_b.jpg)
 
+
 ![Half Soldered Front](assets/images/ledglasses/PCB1_led_solder_f.jpg)
 
 And some testing...
 
 ![Half Soldered Testing](assets/images/ledglasses/PCB1_test_wiring.jpg)
 
-Finally, the rest.
+One fully soldered...
 
 ![One Fully Soldered](assets/images/ledglasses/PCB1_led_solder_final.jpg)
+
+And now both soldered!
 
 ![Both Fully Soldered](assets/images/ledglasses/PCB1_final.jpg)
 
@@ -105,9 +108,9 @@ and flow.
 
 
 Future steps:
-1) Model, 3D print, and assemble the glasses with the new frames.
-2) Create a box to hold the Circuitry (Teensy, batteries, etc)
-3) Attach teensy to a bluetooth controller
-4) Create app to communicate with bluetooth trinket.
+1. Model, 3D print, and assemble the glasses with the new frames.
+2. Create a box to hold the Circuitry (Teensy, batteries, etc)
+3. Attach teensy to a bluetooth controller
+4. Create app to communicate with bluetooth trinket.
 
 
