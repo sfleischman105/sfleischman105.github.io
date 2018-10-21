@@ -118,3 +118,4 @@ and flow.
 Fully soldered:  
 
 ![Round 2 solder job]({{site.url}}{{site.baseurl}}/assets/images/ledglasses/PCB2_soldered.jpg)
+
