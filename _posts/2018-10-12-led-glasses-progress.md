@@ -72,7 +72,7 @@ And now both soldered!
 
 They turned out great! 
 
-I'd upload a demo video of them working, but I'm a little too lazy right now. But let me tell you,
+I'd upload a demo video of them working later. But let me tell you,
 these things are _bright_. They're so bright I can't look at them without sunglasses on.
 
 ## 3d Printed Front Panel
@@ -115,10 +115,6 @@ and flow.
 ![sketch2]({{site.url}}{{site.baseurl}}/assets/images/ledglasses/PCB_sketch2.jpg)
 
 
-Future steps:
-1. Model, 3D print, and assemble the glasses with the new frames.
-2. Create a box to hold the Circuitry (Teensy, batteries, etc)
-3. Attach teensy to a bluetooth controller
-4. Create app to communicate with bluetooth trinket.
+Fully soldered:  
 
-
+![Round 2 solder job]({{site.url}}{{site.baseurl}}/assets/images/ledglasses/PCB2_soldered.jpg)
