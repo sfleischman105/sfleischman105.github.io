@@ -115,7 +115,7 @@ and flow.
 ![sketch2]({{site.url}}{{site.baseurl}}/assets/images/ledglasses/PCB_sketch2.jpg)
 
 
-Fully soldered:  
+Fully soldered second round PCBs:  
 
 ![Round 2 solder job]({{site.url}}{{site.baseurl}}/assets/images/ledglasses/PCB2_soldered.jpg)
 
