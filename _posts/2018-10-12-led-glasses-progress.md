@@ -117,5 +117,5 @@ and flow.
 
 Fully soldered second round PCBs:  
 
-![Round 2 solder job]({{site.url}}{{site.baseurl}}/assets/images/ledglasses/PCB2_soldered.jpg)
+![Round 2 soldered]({{site.url}}{{site.baseurl}}/assets/images/ledglasses/PCB2_soldered.jpg)
 
