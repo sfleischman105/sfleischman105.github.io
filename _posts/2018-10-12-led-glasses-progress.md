@@ -111,11 +111,18 @@ and flow.
 - Wider pin hole lips for better soldering connection.
 - Track Cleanup. 
 
+Schematics:
 
 ![sketch2]({{site.url}}{{site.baseurl}}/assets/images/ledglasses/PCB_sketch2.jpg)
 
 
-Fully soldered second round PCBs:  
+It was a decent surprise to see how well these PCB's turned out with the bridges inserted. It took only 2 hours to
+solder the SMD capacitors on, and around 3 hours to solder the neopixels into place (including the time it took to
+desolder a faulty LED. Ugh).
+
 
 ![Round 2 soldered]({{site.url}}{{site.baseurl}}/assets/images/ledglasses/PCB2_soldered.jpg)
+
+That's my current state of progress. Next comes the 3d printing, something I've been avoiding for a while. I'll post
+another update when there's decent progress.
 
