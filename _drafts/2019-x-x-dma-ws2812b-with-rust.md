@@ -47,6 +47,11 @@ These two generally the same
 
 ## Advanced Buffer BitBanding Techniques
 
+### Possible Future
+
+Talk about presetting 2 + (1 * NUM STRANDS) LEDS in advance
+Doesn't allow for less CPU (perhaps more) but 
+
 ## Outline of requirements
 
 - Fast CPU
